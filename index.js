@@ -19,44 +19,42 @@ function formatDate(timestamp) {
   return `${day} ${hour}:${minutes}`;
 }
 
-function formatForecastDay(timestamp) {
-  let date = new Date(timestamp * 1000);
-  let day = date.getDay();
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  return days[day];
-}
-
-function displayForecast(response) {
-  let forecast = response.data.daily;
+function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
-  let forecastHTML = `<div class="row">`;
-  forecast.forEach(function (forecastDay, index) {
-    if (index < 7) {
-      forecastHTML =
-        forecastHTML +
-        `
-          <div class="col">
-              <div class="weather-forecast-date">
-               ${formatForecastDay(forecastDay.dt)}
-                    </div>
-                 <img class="forecast-icon" src="https://openweathermap.org/img/wn/${
-                   forecastDay.weather[0].icon
-                 }@2x.png" alt="">
-                    <div class="weather-forecast-temp">
-                     <span class="weather-forecast-temp-max">${Math.round(
-                       forecastDay.temp.max
-                     )}°</span>
-                     <span class="weather-forecast-temp-min">${Math.round(
-                       forecastDay.temp.min
-                     )}°</span>
-                  </div>
-                 </div>
-             </div>`;
-    }
+
+  let forecastHTML = `<div class="row"> `;
+  let days = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+    <div class="col-2">
+      <div class="weather-forecast-date">${day}</div>
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAAdVJREFUaN7tmc1thDAQRimBElwCJVBCSvAxR5fgEiiBEiiBErhyIx24A2cc2WhiAf4ZA1rJkZ4UZZPN9/AwHrON1rr5ZJoqUAWqQBWoAlWgxJf++WaAAGZAAdpD2dfM7zDS/yopAGE6YDoIHMLIdK8KQIAWGIAtQ8Bh/r59bQWQjCBILCkSJIF1XVuAA9Jivm9ROd0ukS0AQTtgA7SH+Vn31EoEBSAMA2YUUAHiJDyWcCtBuidIArZEroJewVEpjQSJjiIgMsMbpHdjf53sCcEWSxEYCQKOyZQhkshZBZYkYEtHeLVPQSGJnHIS0QI2/FIo+L+VILTXOUVA3BD+D3Q/pAqoFIEebUxFQQLJN/Ojo0TEqDG/JgBv1hdgeVNAP4CKPSvkCKiCQc1KSMRs2+x902hO/Z4cYFhgWOQHY8zo9hOKgCCGH71BEXcqHjEBKDft5gowypVH4YeLgKE9ZSO10cxz7z7TFJqxOEUgZxyYbPi+0M4uSRuZPYCnCPBA6TwrYCWWyFbJImo/FTMpM6pAG5CYvDO0LDii7x2JNAtdSGxuQyp41Q87UqkHW8NJzYsbw+8d6Y5Hi+7qbw8IyOIPd9HRVD8qUD8fqAJVoApUgSrwqfwCJ6xaZshM+xMAAAAASUVORK5CYII="
+        alt=""
+        width="40"
+      />
+      <div class="weather-forecast-temperature">
+        <span class="weather-forecast-temperature-max">18&deg;</span>
+        <span class="weather-forecast-temperature-min">12&deg;</span>
+      </div>
+    </div>
+  `;
   });
-  forecastHTML = forecastHTML + `</div>`;
+  forecastHTML = forecastHTML + `<div>;`;
   forecastElement.innerHTML = forecastHTML;
 }
+
+function displayTemperature(response) {
+  let temperatureElement = document.querySelector("#temperature");
+  let cityElement = document.querySelector("#city");
+  let descriptionElement = document.querySelector("#description");
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#wind");
+  let dateElement = document.querySelector("#date");
+  let iconElement = document.querySelector("#icon");
+  
 let weatherIcon = document.createElement("img");
 weatherIcon.classList.add("weather-icon");
 
