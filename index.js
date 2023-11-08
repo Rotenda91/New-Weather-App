@@ -23,7 +23,7 @@ function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row"> `;
-  let days = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu"];
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
   days.forEach(function (day) {
     forecastHTML =
       forecastHTML +
@@ -54,14 +54,14 @@ function displayTemperature(response) {
   let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
-  
+}
+
 let weatherIcon = document.createElement("img");
 weatherIcon.classList.add("weather-icon");
 
 function getForecast(coordinates) {
   console.log(coordinates);
   let apiKey = "c05f3c3d653fc2957ecba334d1f4feb1";
-
   let apiURl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   console.log(apiURl);
   axios.get(apiURl).then(displayForecast);
@@ -159,3 +159,4 @@ let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", showCelsiusTemp);
 
 search("Johannesburg");
+displayForecast();
